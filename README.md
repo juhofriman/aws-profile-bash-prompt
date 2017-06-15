@@ -1,8 +1,8 @@
 # BASH AWS PROFILE
 
-Simple bash utility for configuring new sub shell with AWS_DEFAULT_PROFILE.
+Simple bash utility for configuring new bash sub shell with AWS_DEFAULT_PROFILE.
 
-I just hate adding --profile to aws-cli. This opens new subshell with AWS_DEFAULT_PROFILE configured and displays neat prompt.
+I just hate adding --profile to aws-cli commands. This opens new subshell with AWS_DEFAULT_PROFILE configured and displays neat prompt.
 
 ## Usage
 
@@ -17,4 +17,4 @@ AWS [personal]: exit
 exit
 ```
 
-Works well with MFA authentication as well.
+Works with MFA authentication as well.
