@@ -4,6 +4,8 @@ When having more than one AWS account, switching between different accounts can 
 
 To my experience, people usually simply add `--profile` switch to all aws-cli commands. I consider this **extremely** dangerous approach, because it is really easy to run commands to completely wrong account. Aws-cli respects AWS_DEFAULT_PROFILE environment parameter, and one can adjust this by "mutating" bash with `export AWS_DEFAULT_PROFILE=my-profile`. I consider using sub-shells more safe and easy approach because I want to **see all the time** to which account I'm currently running commands on.
 
+So this is simply just opens new bash sub shell with AWS_DEFAULT_PROFILE and PS1 (bash prompt) set nicely. Bash prompt then displays currently active profile, and you will never run commands to wrong account!
+
 This also works great with MFA authentication, which is essential.
 
 ## Install
