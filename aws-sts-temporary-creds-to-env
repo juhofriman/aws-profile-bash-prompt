@@ -1,0 +1,22 @@
+#! /bin/bash
+
+command -v jq >/dev/null 2>&1 || { echo "Parsing temporary AWS credentials requires jq. Hint: brew install jq" >&2; exit 1; }
+
+ROLE_ARN=`aws configure get role_arn`
+
+if [ -z $ROLE_ARN ]; then
+  echo "No role_arn in profile, refusing to fetch credentials"
+  exit 1
+fi
+
+TOKEN_JSON=`aws sts assume-role --role-arn $ROLE_ARN --role-session-name "bashSubshellSession"`
+
+red=`tput setaf 1`
+green=`tput setaf 2`
+reset=`tput sgr0`
+
+PS1="\[${green}\]AWS [\[${red}\]$AWS_DEFAULT_PROFILE\[${green}\]*]:\[${reset}\] \w $ " \
+  AWS_ACCESS_KEY_ID=`echo $TOKEN_JSON | jq -r '.Credentials.AccessKeyId'` \
+  AWS_SECRET_ACCESS_KEY=`echo $TOKEN_JSON | jq -r '.Credentials.SecretAccessKey'` \
+  AWS_SESSION_TOKEN=`echo $TOKEN_JSON | jq -r '.Credentials.SessionToken'` \
+  bash
