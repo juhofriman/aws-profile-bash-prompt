@@ -4,13 +4,13 @@
 
 When having more than one AWS account, switching between different accounts can be painfull. This is super simple, yet pretty efficient, way of handling multiple AWS profiles.
 
-To my experience, people usually simply add `--profile` switch to all aws-cli commands. I personally consider this **extremely** dangerous approach, because it is really easy to run commands to a completely wrong account. `Aws-cli` respects AWS_DEFAULT_PROFILE environment parameter, and one can adjust this by "mutating" bash with `export AWS_DEFAULT_PROFILE=my-profile`. Using sub-shells more safe and easy approach because I want to **see all the time** to which account I'm currently running commands on. That's why we print current AWS_DEFAULT_PROFILE to bash prompt.
+With properly configured AWS-CLI, you can execute commands to various AWS accounts using `--profile` switch. I personally consider this **extremely** dangerous approach, because it is really easy to run commands to a completely wrong account. AWS-CLI respects AWS_DEFAULT_PROFILE environment parameter, and one can adjust this by "mutating" bash with `export AWS_DEFAULT_PROFILE=my-profile`. Using sub-shells more safe and easy approach because I want to **see all the time** to which account I'm currently running commands on. That's why we print current AWS_DEFAULT_PROFILE to bash prompt.
 
 So this is simply just opens new bash sub shell with AWS_DEFAULT_PROFILE and PS1 (bash prompt) set nicely. Bash prompt then displays currently active profile, and you will never run commands to wrong account!
 
 This also works great with MFA authentication, which is essential.
 
-Another feature is `aws-sts-temporary-creds-to-env`, which is intended to use in conjunction with `aws-profile`. It simply fetches temporary credentials to new bash subshell, and it is primarily intended to use for testing and trying out `aws-sdk` based programs as they tend to read credentials from environment variables such as `AWS_ACCESS_KEY_ID`.
+Another feature is `aws-sts-temporary-creds-to-env`, which is intended to use in conjunction with `aws-profile`. It simply fetches temporary credentials to new bash subshell, and it is primarily intended to use for testing and trying out AWS-SDK based programs, as they tend to read credentials from environment variables such as `AWS_ACCESS_KEY_ID`.
 
 ## Install
 

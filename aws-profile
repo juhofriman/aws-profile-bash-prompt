@@ -1,6 +1,6 @@
 #! /bin/bash
 
-PROFILES=($(cat ~/.aws/config | grep '\[profile' | sed -n 's/\[profile \(.*\).*\]/\1/p'))
+PROFILES=($(cat ~/.aws/config | grep '\[profile' | sed -n 's/\[profile \(.*\).*\]/\1/p' | sort))
 
 if [ -z "$1" ];  then
     echo "Pass profile name as an argument. Mayhaps one of these?"
